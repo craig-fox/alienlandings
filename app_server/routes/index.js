@@ -6,7 +6,7 @@ var ctrlOthers = require('../controllers/others');
 /* Landings home page. */
 router.get('/', ctrlLandings.homelist);
 router.get('/landing', ctrlLandings.landingInfo);
-router.get('/landing/quote/new', ctrlLandings.addReport);
+router.get('/landing/quote/new', ctrlLandings.addQuote);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);

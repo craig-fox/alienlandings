@@ -11,7 +11,7 @@ module.exports.landingInfo = function(req, res){
     res.render('landing-info', { title: 'Landing info' });
 };
 
-/* GET 'Add report' page */
-module.exports.addReport = function(req, res){
-    res.render('index', { title: 'Add quote' });
+/* GET 'Add quote' page */
+module.exports.addQuote = function(req, res){
+    res.render('landing-quote-form', { title: 'Add quote' });
 };
