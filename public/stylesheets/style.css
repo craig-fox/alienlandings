@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+.black{
+  color: black;
+}
+
+.rumor{
+  padding:3px;
+  margin: 2px;
+}
+
+.framed{
+  margin: 3px;
+}
+
+.quote{
+  padding-bottom: 5px;
+}
+
+.panel-body.quote-container {padding-top: 0;}
+.quote-header {margin-bottom: 10px;}

@@ -3,9 +3,30 @@ html
   head
     meta(name='viewport', content='width=device.width, initial-scale=1.0')
     title= title
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
     link(rel='stylesheet', href='/bootstrap/css/grayscale.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
-    script(src='/javascripts/jquery-2.2.0.min.js')
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') Alien Landings
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/about/') About
+    .container
+      block content
+      footer
+        .row
+          .col-xs-12
+            small &copy; Craig Fox 2016
+            br
+            small Images courtesy of dan at &nbsp;
+            a(href="FreeDigitalPhotos.net") FreeDigitalPhotos.net
+    script(src='/bootstrap/js/jquery.js')
     script(src='/bootstrap/js/bootstrap.min.js')
