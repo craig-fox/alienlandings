@@ -1,23 +1,23 @@
+include _includes/sharedHTMLfunctions
+
 extends layout
 
 block content
     .row.page-header
         .col-lg-12
-            h1 Roswell
+            h1= pageHeader.title
+            p.lead #{landing.name}
+            small= sidebar.synopsis
     .row
         .col-xs-12.col-md-9
             .row
                 .col-xs-12.col-sm-6
                     p.credibility
                         span Credibility &nbsp;
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star-empty
-                        span.glyphicon.glyphicon-star-empty
-                    span.location Roswell, New Mexico, USA &nbsp;
+                          +credRating(landing.credibility)
+                    span.location #{landing.location} &nbsp;
                     span on &nbsp;
-                    span.discovered November 26, 1947
+                    span.discovered= landing.discoveredAt
                     br
                     br
                     .panel.panel-primary
@@ -34,44 +34,28 @@ block content
                         .panel-heading
                             h2.panel-title Rumored Aspects
                         .panel-body
-                            span.label-warning.rumor Alien Tech
-                            span.label-danger.rumor Probing
-                            span.label-warning.rumor Military Operation
-                            span.label-info.rumor Cover Up?
+                            each rumor in landing.rumors
+                                span.label.label-warning #{rumor} &nbsp;
                 .col-xs-12.col-sm-6
-                    img.img-responsive.img-rounded.framed(src='http://maps.googleapis.com/maps/api/staticmap?center=33.3941667,-104.5225&zoom=17&size=400x250&sensor=false&markers=33.3941667,--104.5225&scale=2')
-                    img.framed(src="/images/roswell.jpg")
+                    img.img-responsive.img-rounded.framed(src="http://maps.googleapis.com/maps/api/staticmap?center="+
+                    "#{landing.geo.latitude},#{landing.geo.longitude}&zoom=17&size=400x250&sensor=false&markers="+
+                    "#{landing.geo.latitude},#{landing.geo.longitude}&scale=2")
+                    img.framed(src="/images/#{landing.photo}")
             .row
                 .col-xs-12
                     .panel.panel-primary.quote-panel
-                        .panel-heading
+                        .panel-heading(style="height: 50px;")
                             a.btn.btn-default.pull-right(href='/landing/quote/new') Add Quote
                             h2.panel-title Quotes
                         .panel-body.quote-container
-                            .row
-                                .quote
-                                    .well.well-sm.quote-header
+                            each quote in landing.quotes
+                                .row
+                                    .quote
+                                        .well.well-sm.quote-header
                                             blockquote
                                                 .col-xs-8
-                                                    i.black It was a close encounter of the 5th kind!
-
+                                                    i.black= quote.content
                                                 .col-xs-4
-                                                    span.black Lauren Robinson
-                            .row
-                                .quote
-                                    .well.well-sm.quote-header
-                                        blockquote
-                                            .col-xs-8
-                                                i.black Looked a bit like Gollum, I reckon
+                                                    span.black= quote.person
 
-                                            .col-xs-4
-                                                span.black Steve Simpson
-                            .row
-                                .quote
-                                    .well.well-sm.quote-header
-                                        blockquote
-                                            .col-xs-8
-                                                i.black The truth is in there
 
-                                            .col-xs-4
-                                                span.black Dana Scully

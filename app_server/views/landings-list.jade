@@ -1,36 +1,31 @@
+include _includes/sharedHTMLfunctions
+
 extends layout
 
 block content
     #banner.page-header
         .row
             .col-lg-6
-                h1 Alien Landings
-                p &nbsp; Find where extraterrestial visitors have landed!
+                h1= pageHeader.title
+                small &nbsp;#{pageHeader.strapline}
     .row
         .col-xs-12.col-sm-8
             .row.list-group
-                .col-xs-12.list-group-item
-                    h4
-                        a(href="/landing") Roswell Sighting
-                        small &nbsp;
-                            span.glyphicon.glyphicon-star
-                            span.glyphicon.glyphicon-star
-                            span.glyphicon.glyphicon-star
-                            span.glyphicon.glyphicon-star-empty
-                            span.glyphicon.glyphicon-star-empty
-                        span.badge.pull-right.badge-default 12600km
+                each landing in landings
+                    .col-xs-12.list-group-item
+                        h4
+                            a(href="/landing")= landing.name
+                            small &nbsp;
+                                +credRating(landing.credibility)
+                            span.badge.pull-right.badge-default #{landing.distance} &nbsp;
 
-                    h5
-                       small Discovered &nbsp;
-                       time(style="color:black;") November 26, 1947 &nbsp;
-                       span(style="color:black;") at &nbsp;
-                        span.small.location(style="color:black;") Roswell, New Mexico, USA, Latitude 33.3941667 Location -104.5225
-                    p
-                        span.label.label-warning Alien Tech &nbsp;
-                        span.label.label-danger Probing &nbsp;
-                        span.label.label-warning Saucer Spacecraft &nbsp;
-                        span.label.label-warning Cover Up &nbsp;
-        .col-xs-12.col-sm-4
-            p.small.lead
-            | The Roswell sighting is a touchstone in popular culture,
-            | dogged by persistent rumours of a government cover up
+                        h5
+                           small Discovered &nbsp;
+                           time(style="color:black;") #{landing.discoveredAt} &nbsp;
+                           span(style="color:black;") at &nbsp;
+                            span.small.location(style="color:black;")= landing.location
+                        p
+                            each rumor in landing.rumors
+                                span.label.label-warning #{rumor} &nbsp;
+
+
