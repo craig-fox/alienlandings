@@ -145,13 +145,13 @@ module.exports.quotesDeleteOne = function(req, res){
                         sendJsonResponse(res, 404, {"message" : "quoteid not found"});
                     } else {
                         landing.quotes.id(req.params.quoteid).remove();
-                        landing.save(function(err)){
+                        landing.save(function(err){
                             if(err){
                                 sendJsonResponse(res, 404, err);
                             } else {
                                 sendJsonResponse(res, 204, null);
                             }
-                        }
+                        });
                     }
                 } else {
                     sendJsonResponse(res, 404, {"message": "No quote to delete"});

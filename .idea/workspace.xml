@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40b2628b-d9e6-457e-a173-9c5087c58599" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/AlienLandings_node_modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app_server/models/db.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app_server/models/landings.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AlienLandings.iml" afterPath="$PROJECT_DIR$/.idea/AlienLandings.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controllers/quotes.js" afterPath="$PROJECT_DIR$/app_api/controllers/quotes.js" />
     </list>
     <ignored path="AlienLandings.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +36,8 @@
       <file leaf-file-name="quotes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/quotes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8125">
-              <caret line="156" column="82" selection-start-line="156" selection-start-column="82" selection-end-line="156" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.65909094">
+              <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -138,8 +131,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1081" />
-    <option name="y" value="112" />
+    <option name="x" value="986" />
+    <option name="y" value="306" />
     <option name="width" value="1400" />
     <option name="height" value="977" />
   </component>
@@ -493,7 +486,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1081" y="112" width="1400" height="977" extended-state="0" />
+    <frame x="986" y="306" width="1400" height="977" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -746,8 +739,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_api/controllers/quotes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8125">
-          <caret line="156" column="82" selection-start-line="156" selection-start-column="82" selection-end-line="156" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.65909094">
+          <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="8" />
           <folding />
         </state>
       </provider>
