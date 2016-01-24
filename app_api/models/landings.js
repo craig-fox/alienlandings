@@ -19,7 +19,7 @@ var landingSchema = new mongoose.Schema({
     discoveredAt: String,
     location: String,
     rumors: [String],
-    coords: {type: [Number], index: '2dsphere'},
+    coords: {type: [Number], index: '2dsphere', required: true},
     siteViewingTimes: [siteViewingTimeSchema],
     quotes: [quoteSchema]
 });
