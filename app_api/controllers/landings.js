@@ -26,6 +26,7 @@ var sendJsonResponse = function(res, status, content){
 }
 
 module.exports.landingsListByDistance = function(req, res){
+    console.log("warhammer quest");
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
     var point = {
@@ -51,8 +52,9 @@ module.exports.landingsListByDistance = function(req, res){
             sendJsonResponse(res, 404, err);
         } else {
            results.forEach(function(doc){
+               console.log("fried pussy: " + JSON.stringify(doc));
                 landings.push({
-                    distance: theEarth.getDistanceFromRads(doc.distance),
+                    distance: theEarth.getDistanceFromRads(doc.dis),
                     name: doc.obj.name,
                     credibility: doc.obj.credibility,
                     discoveredAt: doc.obj.discoveredAt,
@@ -61,7 +63,7 @@ module.exports.landingsListByDistance = function(req, res){
                     _id: doc.obj._id
                 });
             });
-            sendJsonResponse(res, 200, locations);
+            sendJsonResponse(res, 200, landings);
         }
     });
 };
@@ -80,7 +82,7 @@ module.exports.landingsReadOne = function(req, res){
                 sendJsonResponse(res, 200, landing);
             });
     } else {
-        sendJsonResponse(res, 404, {"message": "No locationid in request"});
+        sendJsonResponse(res, 404, {"message": "No landingid in request"});
     }
 
 };
