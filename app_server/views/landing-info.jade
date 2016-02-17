@@ -38,14 +38,14 @@ block content
                                 span.label.label-warning #{rumor} &nbsp;
                 .col-xs-12.col-sm-6
                     img.img-responsive.img-rounded.framed(src="http://maps.googleapis.com/maps/api/staticmap?center="+
-                    "#{landing.geo.latitude},#{landing.geo.longitude}&zoom=17&size=400x250&sensor=false&markers="+
-                    "#{landing.geo.latitude},#{landing.geo.longitude}&scale=2")
+                    "#{landing.coords.lat},#{landing.coords.lng}&zoom=17&size=400x250&sensor=false&markers="+
+                    "#{landing.coords.lat},#{landing.coords.lng}&scale=2")
                     img.framed(src="/images/#{landing.photo}")
             .row
                 .col-xs-12
                     .panel.panel-primary.quote-panel
                         .panel-heading(style="height: 50px;")
-                            a.btn.btn-default.pull-right(href='/landing/quote/new') Add Quote
+                            a.btn.btn-default.pull-right(href='/landing/#{landing._id}/quotes/new') Add Quote
                             h2.panel-title Quotes
                         .panel-body.quote-container
                             each quote in landing.quotes
@@ -54,8 +54,10 @@ block content
                                         .well.well-sm.quote-header
                                             blockquote
                                                 .col-xs-8
-                                                    i.black= quote.content
+                                                    i.black= quote.quoteText
+                                                    small
+                                                        +formatDate(quote.takenAt)
                                                 .col-xs-4
-                                                    span.black= quote.person
+                                                    span.black= quote.author
 
 

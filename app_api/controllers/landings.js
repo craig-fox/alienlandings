@@ -26,7 +26,6 @@ var sendJsonResponse = function(res, status, content){
 }
 
 module.exports.landingsListByDistance = function(req, res){
-    console.log("warhammer quest");
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
     var point = {
@@ -35,7 +34,7 @@ module.exports.landingsListByDistance = function(req, res){
     };
     var geoOptions = {
         spherical: true,
-        maxDistance: theEarth.getRadsFromDistance(20),
+        maxDistance: theEarth.getRadsFromDistance(20000),
         num: 10
     };
 
@@ -48,11 +47,12 @@ module.exports.landingsListByDistance = function(req, res){
 
     Landing.geoNear(point, geoOptions, function(err, results, stats){
         var landings = [];
+        console.log("Point: " + JSON.stringify(point));
+       // console.log("The Results: " + JSON.stringify(results));
         if(err){
             sendJsonResponse(res, 404, err);
         } else {
            results.forEach(function(doc){
-               console.log("fried pussy: " + JSON.stringify(doc));
                 landings.push({
                     distance: theEarth.getDistanceFromRads(doc.dis),
                     name: doc.obj.name,
@@ -134,7 +134,6 @@ module.exports.landingsUpdateOne = function(req, res){
                 });
             }
         );
-    //sendJsonResponse(res, 200, {"status":"success"});
 };
 
 module.exports.landingsDeleteOne = function(req, res){
@@ -184,5 +183,7 @@ module.exports.landingsCreate = function(req, res){
                 sendJsonResponse(res, 201, landing);
             }
     });
-    //sendJsonResponse(res, 200, {"status":"success"});
 };
+
+
+

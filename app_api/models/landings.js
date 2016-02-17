@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var quoteSchema = new mongoose.Schema({
-    author: String,
-    quoteText: String,
+    author: {type: String, required: true},
+    quoteText: {type: String, required: true},
     takenAt: {type: Date, "default": Date.now}
 });
 

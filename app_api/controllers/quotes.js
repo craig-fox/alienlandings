@@ -17,9 +17,11 @@ var doAddQuote = function(req, res, landing){
             quoteText: req.body.quoteText,
             takenAt: req.body.takenAt
         });
+
         landing.save(function(err, landing){
             var thisQuote;
             if(err){
+                console.log(err);
                 sendJsonResponse(res, 400, err);
             } else {
                 thisQuote = landing.quotes[landing.quotes.length - 1];
@@ -168,7 +170,7 @@ module.exports.quotesCreate = function(req, res){
         Landing.findById(landingid)
             .select('quotes')
             .exec(
-                function(err, location){
+                function(err, landing){
                     if(err){
                         sendJsonResponse(res, 400, err);
                     } else {

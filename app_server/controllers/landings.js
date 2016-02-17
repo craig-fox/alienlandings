@@ -8,10 +8,17 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 var renderHomepage = function(req, res, responseBody){
-    console.log("SHOCK ME");
-    if(responseBody == undefined){
-        console.log("I needed a surprise");
+    var message;
+
+    if (!(responseBody instanceof Array)){
+        message = "API lookup error";
+        responseBody = [];
+    } else {
+       if (!responseBody.length){
+           message = "No places found nearby";
+       }
     }
+
     res.render('landings-list', {
         title: 'Alien Landings - find where E.T has touched down',
         pageHeader: {
@@ -19,7 +26,24 @@ var renderHomepage = function(req, res, responseBody){
             strapline: 'Find where extraterrestials have landed near you!'
         },
         sidebar: "Wanting to know where aliens have landed over the past century and a bit?",
-        landings: responseBody
+        landings: responseBody,
+        message: message
+    });
+};
+
+var _showError = function(req, res, status){
+    var title, content;
+    if(status === 404){
+        title = "404, page not found";
+        content = "Oh dear. Looks like we can't find this page. Sorry.";
+    } else {
+        title = "something's gone wrong (Error " + status + ")";
+        content = "A non-404 error has occurred. Please stay calm.";
+    }
+    res.status(status);
+    res.render('generic-text', {
+        title: title,
+        content: content
     });
 };
 
@@ -42,10 +66,13 @@ module.exports.homelist = function(req, res){
         function(err, response, body){
             var i, data;
             data = body;
-            for(i=0; i<data.length; i++){
-                data[i].distance = _formatDistance(data[i].distance);
+            if(response.statusCode === 200 && data.length){
+                for(i=0; i<data.length; i++){
+                    data[i].distance = _formatDistance(data[i].distance);
+                }
             }
-            renderHomepage(req, res, body);
+
+            renderHomepage(req, res, data);
         }
     );
 
@@ -59,7 +86,7 @@ module.exports.homelist = function(req, res){
             unit = 'm';
         }
         return numDistance + unit;
-    }
+    };
 
 
 }
@@ -99,44 +126,155 @@ module.exports.homelist = function(req, res){
     });
 }; */
 
-/* GET 'Landing info' page */
-module.exports.landingInfo = function(req, res){
+var renderDetailPage = function(req, res, landingDetail){
+    console.log("Landing Detail:" + JSON.stringify(landingDetail));
+
     res.render('landing-info', {
-        title: 'Roswell',
-        pageHeader: {title: 'Roswell'},
+        title: landingDetail.name,
+        pageHeader: {title: landingDetail.name},
         sidebar: {
             synopsis: 'The Roswell sighting is a touchstone in popular culture, where the military covered up '
             + 'the true nature of a crashed device.'
         },
-        landing: {
-            name: 'Roswell Incident',
-            location: 'Roswell, New Mexico, USA',
-            discoveredAt: 'July 8, 1947',
-            credibility: 3,
-            geo: {latitude: 13.7539800, longitude: 100.5014400},
-            rumors: ['Alien Tech', 'Little Green Men', 'Crash Landing', 'Cover Up'],
-            photo: 'aliens.jpg',
-            quotes: [
-                {
-                  content: 'It was a close encounter of the 5th kind!',
-                  person: 'Lauren Robinson'
-                },
-                {
-                    content: 'Looked a bit like Gollum, I reckon',
-                    person: 'Steve Simpson'
-                },
-                {
-                    content: 'The truth is in there',
-                    person: 'Dana Scully'
-                }
-            ]
-        }
+        landing: landingDetail
     });
 };
 
+/* GET 'Landing info' page */
+module.exports.landingInfo = function(req, res){
+    var requestOptions, path;
+    path = "/api/landings/" + req.params.landingid;
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "GET",
+        json: {}
+    };
+    request(
+       requestOptions,
+        function(err, response, body){
+            var data = body;
+            if(response.statusCode === 200){
+                data.coords = {
+                    lng: body.coords[0],
+                    lat: body.coords[1]
+                };
+                renderDetailPage(req, res, data);
+            } else {
+               _showError(req, res, response.statusCode);
+            }
+
+        }
+    );
+
+};
+
 /* GET 'Add quote' page */
-module.exports.addQuote = function(req, res){
+
+var renderQuoteForm = function(req, res, landingDetail){
     res.render('landing-quote-form', {
-        title: 'Roswell Site Quote'
+        title: 'Witness Quote From ' + landingDetail.name + ' Landing Site',
+        pageHeader: {title: 'Quote ' + landingDetail.name},
+        error: req.query.err
     });
 };
+
+var getLandingInfo = function (req, res, callback){
+    var requestOptions, path;
+    path = "/api/landings/" + req.params.landingid;
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "GET",
+        json: {}
+    };
+
+    request(
+        requestOptions,
+        function(err, response, body){
+            var data = body;
+            if(response.statusCode === 200){
+                data.coords = {
+                    lng: body.coords[0],
+                    lat: body.coords[1]
+                };
+                callback(req, res, data);
+            } else {
+                _showError(req, res, response.statusCode);
+            }
+        }
+    );
+};
+
+module.exports.landingInfo = function(req, res){
+    getLandingInfo(req, res, function(req, res, responseData){
+        renderDetailPage(req, res, responseData);
+    });
+};
+
+module.exports.addQuote = function(req, res){
+    getLandingInfo(req, res, function(req, res, responseData){
+        renderQuoteForm(req, res, responseData);
+    });
+};
+
+module.exports.doAddQuote = function(req, res){
+    var requestOptions, path, landingid, postdata;
+    landingid = req.params.landingid;
+    path = "/api/landings/" + landingid + '/quotes';
+
+    postdata = {
+        author: req.body.author,
+        quoteText: req.body.quoteText,
+        takenAt: req.body.takenAt
+    };
+
+    requestOptions = {
+       url: apiOptions.server + path,
+       method: "POST",
+       json: postdata
+    };
+
+    if(!postdata.author || !postdata.quoteText){
+        res.redirect('/landing/' + landingid + '/quotes/new?err=val')
+    } else {
+        request(
+            requestOptions,
+            function(err, response, body) {
+
+                if (response.statusCode === 201) {
+                    res.redirect('/landing/' + landingid);
+                } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError'){
+                    res.redirect('/landing/' + landingid + '/quotes/new?err=val')
+                } else {
+                    console.log(body);
+                    _showError(req, res, response.statusCode);
+                }
+            }
+        );
+    }
+
+
+};
+
+/*landing: {
+    name: 'Roswell Incident',
+        location: 'Roswell, New Mexico, USA',
+        discoveredAt: 'July 8, 1947',
+        credibility: 3,
+        geo: {latitude: 13.7539800, longitude: 100.5014400},
+    rumors: ['Alien Tech', 'Little Green Men', 'Crash Landing', 'Cover Up'],
+        photo: 'aliens.jpg',
+        quotes: [
+        {
+            content: 'It was a close encounter of the 5th kind!',
+            person: 'Lauren Robinson'
+        },
+        {
+            content: 'Looked a bit like Gollum, I reckon',
+            person: 'Steve Simpson'
+        },
+        {
+            content: 'The truth is in there',
+            person: 'Dana Scully'
+        }
+    ]
+} */

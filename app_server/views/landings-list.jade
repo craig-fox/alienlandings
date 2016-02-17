@@ -10,11 +10,12 @@ block content
                 small &nbsp;#{pageHeader.strapline}
     .row
         .col-xs-12.col-sm-8
+            .error= message
             .row.list-group
                 each landing in landings
                     .col-xs-12.list-group-item
                         h4
-                            a(href="/landing")= landing.name
+                            a(href="/landing/#{landing._id}")= landing.name
                             small &nbsp;
                                 +credRating(landing.credibility)
                             span.badge.pull-right.badge-default #{landing.distance} &nbsp;
