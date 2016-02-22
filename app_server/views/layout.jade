@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='alienLandingsApp')
   head
     meta(name='viewport', content='width=device.width, initial-scale=1.0')
     title= title
@@ -31,6 +31,8 @@ html
         .row
           .col-xs-12
             i.small Disclaimer: The site author does not really believe in alien visitations, and only uses tinfoil for culinary purposes
+    script(src='/angular/angular.min.js')
+    script(src='/angular/alienLandingsApp.js')
     script(src='/bootstrap/js/jquery.js')
     script(src='/bootstrap/js/bootstrap.min.js')
-    script(src='/bootstrap/js/validation.js')
+    script(src='/javascripts/validation.js')

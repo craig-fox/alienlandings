@@ -34,9 +34,9 @@ module.exports.landingsListByDistance = function(req, res){
     };
     var geoOptions = {
         spherical: true,
-        maxDistance: theEarth.getRadsFromDistance(20000),
-        num: 10
+        maxDistance: theEarth.getRadsFromDistance(20000000000000000000000)
     };
+    console.log("frankenstein " + JSON.stringify(req.query));
 
     if(!lng || !lat){
         sendJsonResponse(res, 404, {
@@ -48,11 +48,12 @@ module.exports.landingsListByDistance = function(req, res){
     Landing.geoNear(point, geoOptions, function(err, results, stats){
         var landings = [];
         console.log("Point: " + JSON.stringify(point));
-       // console.log("The Results: " + JSON.stringify(results));
+        console.log("The Results: " + JSON.stringify(results));
         if(err){
             sendJsonResponse(res, 404, err);
         } else {
            results.forEach(function(doc){
+
                 landings.push({
                     distance: theEarth.getDistanceFromRads(doc.dis),
                     name: doc.obj.name,

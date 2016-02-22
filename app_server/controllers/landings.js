@@ -7,27 +7,14 @@ if(process.env.NODE_ENV === 'production'){
     apiOptions.server = "https://blooming-tundra-4978.herokuapp.com";
 }
 
-var renderHomepage = function(req, res, responseBody){
-    var message;
-
-    if (!(responseBody instanceof Array)){
-        message = "API lookup error";
-        responseBody = [];
-    } else {
-       if (!responseBody.length){
-           message = "No places found nearby";
-       }
-    }
-
+var renderHomepage = function(req, res){
     res.render('landings-list', {
         title: 'Alien Landings - find where E.T has touched down',
         pageHeader: {
             title: 'Alien Landings',
             strapline: 'Find where extraterrestials have landed near you!'
         },
-        sidebar: "Wanting to know where aliens have landed over the past century and a bit?",
-        landings: responseBody,
-        message: message
+        sidebar: "Wanting to know where aliens have landed over the past century and a bit?"
     });
 };
 
@@ -49,46 +36,7 @@ var _showError = function(req, res, status){
 
 /* GET 'home' page */
 module.exports.homelist = function(req, res){
-    var requestOptions, path;
-    path = '/api/landings';
-    requestOptions = {
-        url: apiOptions.server + path,
-        method: "GET",
-        json: {},
-        qs: {
-            lng: -104.5225,
-            lat: 33.3941667
-        }
-    };
-
-    request(
-        requestOptions,
-        function(err, response, body){
-            var i, data;
-            data = body;
-            if(response.statusCode === 200 && data.length){
-                for(i=0; i<data.length; i++){
-                    data[i].distance = _formatDistance(data[i].distance);
-                }
-            }
-
-            renderHomepage(req, res, data);
-        }
-    );
-
-    var _formatDistance = function(distance){
-        var numDistance, unit;
-        if(distance > 1){
-            numDistance = parseFloat(distance).toFixed(1);
-            unit = 'km';
-        } else {
-            numDistance = parseInt(distance * 1000, 10);
-            unit = 'm';
-        }
-        return numDistance + unit;
-    };
-
-
+   renderHomepage(req, res);
 }
 
 
@@ -174,7 +122,8 @@ var renderQuoteForm = function(req, res, landingDetail){
     res.render('landing-quote-form', {
         title: 'Witness Quote From ' + landingDetail.name + ' Landing Site',
         pageHeader: {title: 'Quote ' + landingDetail.name},
-        error: req.query.err
+        error: req.query.err,
+        url: req.originalUrl
     });
 };
 
