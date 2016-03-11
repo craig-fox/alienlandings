@@ -9,4 +9,9 @@ module.exports.about = function(req,res){
             content: "Alien Landings was created to track where aliens have landed around the world, listing "+
             "a landing report, a map of the location and images from the landing site."
         });
-}
+};
+
+module.exports.angularApp = function(req, res){
+    res.render('layout', {title: 'Alien Landings'})
+};
+

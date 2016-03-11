@@ -36,7 +36,6 @@ module.exports.landingsListByDistance = function(req, res){
         spherical: true,
         maxDistance: theEarth.getRadsFromDistance(20000000000000000000000)
     };
-    console.log("frankenstein " + JSON.stringify(req.query));
 
     if(!lng || !lat){
         sendJsonResponse(res, 404, {
