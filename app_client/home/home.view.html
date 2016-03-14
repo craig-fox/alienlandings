@@ -11,9 +11,13 @@
                     <a href="/#/landing/{{ landing._id }}">{{ landing.name }}</a>
                     <small class="credibility-stars" credibility-stars
                            credibility="landing.credibility"></small>
-                    <span class="badge pull-right badge-default">
+                    <span class="pull-right">
+                        <small>Distance from Home:&nbsp;</small>
+                        <span class="badge badge-default">
                         {{ landing.distance | formatDistance }}
                     </span>
+                    </span>
+
                 </h4>
                 <p class="black">{{ landing.location }}</p>
                 <p>
@@ -25,7 +29,8 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-4">
-            <p class="lead">{{ vm.sidebar.content }}</p>
+            <img src="/images/roswell.jpg?size=100x75">
+            <p class="lead sidebar">{{ vm.sidebar.content }}</p>
         </div>
     </div>
     <footer-generic></footer-generic>

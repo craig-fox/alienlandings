@@ -33,8 +33,20 @@ a {
   color: rgb(237, 245, 247);
 }
 
+.sidebar{
+  margin-top: 20px;
+}
+
 .download-section {
   padding: 100px;
+}
+
+h4{
+  margin: 0 0 20px;
+}
+
+p{
+  margin: 0 0 10px;
 }
 
 .panel-body.quote-container {padding-top: 0;}
@@ -43,5 +55,11 @@ a {
 .modal-header{
   background-color: #5bc0de;
 }
+
+.rumors-panel {
+  padding: 10px;
+  height: 50px;
+}
+
 
 #filter{margin-left: 4px;}

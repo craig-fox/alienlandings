@@ -72,8 +72,6 @@ module.exports.quotesReadOne = function(req, res){
 };
 
 module.exports.quotesUpdateOne = function(req, res){
-    //sendJsonResponse(res, 200, {"status":"success"});
-
     if(!req.params.landingid || !req.params.quoteid){
         sendJsonResponse(res, 404, {
             "message": "Not found, landingid and quoteid are required"
@@ -160,8 +158,6 @@ module.exports.quotesDeleteOne = function(req, res){
                 }
             }
         );
-
-   // sendJsonResponse(res, 200, {"status":"success"});
 };
 
 module.exports.quotesCreate = function(req, res){
@@ -183,6 +179,4 @@ module.exports.quotesCreate = function(req, res){
             "message": "Not found, landingid required"
         });
     }
-
-    //sendJsonResponse(res, 200, {"status":"success"});
 };

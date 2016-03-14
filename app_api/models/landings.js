@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var quoteSchema = new mongoose.Schema({
     author: {type: String, required: true},
     quoteText: {type: String, required: true},
-    takenAt: {type: Date, "default": Date.now}
+    takenAt: {type: Date, "default": Date.now},
+    menInBlack: {type: Boolean, "default": false}
 });
 
 var siteViewingTimeSchema = new mongoose.Schema({

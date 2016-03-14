@@ -3,7 +3,7 @@ var dbURI = 'mongodb://localhost/AlienLandings';
 if(process.env.NODE_ENV === 'production'){
 
     dbURI = 'mongodb://heroku_1tj43hd1:rm3g444t7bel5rh7a2g3h8dqio@ds047355.mongolab.com:47355/heroku_1tj43hd1';
-    //dbURI = process.env.MONGOLAB_URI;
+    //dbURI = process.env.MONGOLAB_URI : Could not get working, have to use hard-coded value for now;
 }
 mongoose.connect(dbURI);
 mongoose.connection.on('connected', function(){
