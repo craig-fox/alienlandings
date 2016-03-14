@@ -17,6 +17,7 @@
     "jade": "~1.11.0",
     "mongoose": "^4.3.6",
     "morgan": "~1.6.1",
+    "nodep-date-input-polyfill": "^2.4.3",
     "request": "^2.69.0",
     "serve-favicon": "~2.3.0",
     "uglify-js": "^2.6.2"

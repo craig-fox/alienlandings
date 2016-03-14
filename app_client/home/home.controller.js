@@ -23,7 +23,7 @@
             var lat = position.coords.latitude,
                 lng = position.coords.longitude;
             vm.message = "Searching for alien landing sites";
-            alienLandingsData.locationByCoords(lat,lng)
+            alienLandingsData.landingByCoords(lat,lng)
                 .success(function(data){
                     vm.message = data.length >0 ? "": "No locations found";
                     vm.data = {landings: data};
