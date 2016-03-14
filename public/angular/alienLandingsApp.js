@@ -44,7 +44,8 @@ var landingListCtrl = function ($scope, alienLandingsData, geolocation) {
                 $scope.data = {landings: data};
             })
             .error(function(e){
-                $scope.message = "Situation normal all Fucked Up"
+                $scope.message = "An error happened during the landing search"
+                console.log(e);
             });
     };
 
@@ -71,38 +72,6 @@ var alienLandingsData = function($http){
     return {
         landingByCoords: landingByCoords
     };
-
-
-
-   /* return[ { name: 'Roswell Incident',
-        credibility: 3,
-        discoveredAt: 'July 8, 1947',
-        location: 'Roswell, New Mexico, USA',
-        rumors: ['Alien Tech', 'Little Green Men', 'Crash Landing', 'Cover Up'],
-        distance: '11435'
-    },{
-        name: 'Bangkok Fireball',
-        credibility: 2,
-        discoveredAt: 'September 17, 2015',
-        location: 'Bangkok, Thailand',
-        geo: {latitude: 13.7539800, longitude: 100.5014400},
-        rumors: ['Fire In Sky', 'Hidden Landing'],
-        distance: '9572'
-        },{
-        name: 'Kenneth Arnold Flight',
-        credibility: 4,
-        discoveredAt: 'June 24, 1947',
-        location: 'Mount Rainier, Cascade Range, Washington, USA',
-        rumors: ['Flying Saucers', 'Alien Tech', 'Magnetic Disturbance'],
-        distance: '11265'
-        },{
-        name: 'Kim Dotcom MegaUFO',
-        credibility: 1,
-        discoveredAt: 'February 2, 2016',
-        location: 'Coatesville, Auckland, New Zealand',
-        rumors: ['Flying Saucers', 'Alien Tech', 'Magnetic Disturbance'],
-        distance: '0.75675'
-    }]; */
 };
 
 var geolocation = function() {

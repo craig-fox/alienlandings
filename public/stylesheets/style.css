@@ -24,7 +24,24 @@ a {
   padding-bottom: 10px;
 }
 
+.quote-body{
+  color: black;
+  margin-bottom: 10px;
+}
+
+.strapline{
+  color: rgb(237, 245, 247);
+}
+
+.download-section {
+  padding: 100px;
+}
+
 .panel-body.quote-container {padding-top: 0;}
 .quote-header {margin-bottom: 10px;}
+
+.modal-header{
+  background-color: #5bc0de;
+}
 
 #filter{margin-left: 4px;}

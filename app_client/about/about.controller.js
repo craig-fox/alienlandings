@@ -11,8 +11,8 @@
         };
 
         vm.main = {
-           content: "Alien Landings was created to help people find the sites where alien visitors may have landed\n" +
-               "and give conspiracy theorists a whole form of justification in life.\n" +
+           content: "Alien Landings was created to help people find the sites where alien visitors may have landed," +
+               "and give conspiracy theorists plenty of justification in life.\n" +
                "Find where Elvis was transported from this cruel world to a better one, today!"
         };
 

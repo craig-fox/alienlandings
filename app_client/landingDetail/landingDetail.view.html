@@ -30,7 +30,7 @@
                         <div class="panel-body">
                             <img src="http://maps.googleapis.com/maps/api/staticmap?
                                  center={{ vm.data.landing.coords[1] }},{{ vm.data.landing.coords[0] }}&
-                                 amp;zoom=17&amp;size=200x200&amp;sensor=false&amp;markers=
+                                 amp;zoom=17&amp;size=300x250&amp;sensor=false&amp;markers=
                                  {{ vm.data.landing.coords[1] }},{{ vm.data.landing.coords[0] }}
                                  &amp;scale=2" class="img-responsive img-rounded">
                         </div>
@@ -55,7 +55,7 @@
                                 <small class="quoteTakenAt black">{{quote.takenAt | date: 'd MMMM yyyy'}}</small>
                             </div>
                             <div class="col-xs-12">
-                                <p class="black" ng-bind-html="quote.quoteText | addHtmlLineBreaks"></p>
+                                <p class="quote-body" ng-bind-html="quote.quoteText | addHtmlLineBreaks"></p>
                             </div>
                         </div>
                     </div>

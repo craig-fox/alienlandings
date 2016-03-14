@@ -51,7 +51,7 @@ module.exports.quotesReadOne = function(req, res){
                         console.log(landing.quotes.id);
                         quote = landing.quotes.id('569dbf7da826f8bcb73ba42d');
                         if(!quote){
-                            sendJsonResponse(res, 404, {"message": "ah fuck quoteid not found"})
+                            sendJsonResponse(res, 404, {"message": "quoteid was not found"})
                         } else {
                             response = {
                               landing: { name: landing.name,

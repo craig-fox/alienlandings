@@ -13,7 +13,10 @@
         };
 
         vm.sidebar = {
-            content: "The truth is out there. For the last hundred years, alien spacecraft have been visiting our planet"
+            content: "The truth is out there. For the last hundred years, " +
+            "alien spacecraft have been visiting our planet. Or so say a few vividly " +
+            "imaginative folks with one too many viewings of Close Encounters of the Third Kind " +
+            "under the belt. But do we dare doubt? Right now, E.T. may be watching."
         };
 
         vm.message = "Checking your location";
@@ -27,10 +30,10 @@
                 .success(function(data){
                     vm.message = data.length >0 ? "": "No locations found";
                     vm.data = {landings: data};
-                    console.log("ALIENS! " + JSON.stringify(data));
                 })
                 .error(function(e){
                     vm.message = "An error occurred while retrieving data"
+                    console.log(e);
                 });
         };
 
