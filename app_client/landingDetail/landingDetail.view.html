@@ -34,7 +34,24 @@
                             </p>
                         </div>
                     </div>
+                    <form id="changeCredibility" ng-submit="vm.onRatingSubmit()">
+                        <div class="form-group">
+                            <label for="credibilityRating">Rate credibility of this landing&nbsp;</label>
+                            <uib-rating id="credibilityRating" ng-model="vm.data.landing.selectedRating" max="5"></uib-rating>
+                            <button type="submit" class="btn-info">Submit</button>
+                        </div>
+                        <div class="col-sm-8">
+                            <small>
+                                <em>
+                                    A high credibility means you think it&apos;s more likely that extraterrestial beings were present here.
+                                </em>
+                            </small>
+                        </div>
+                    </form>
+
+
                 </div>
+                <br/>
                 <div class="col-xs-12 col-sm-6 landing-map">
                     <div class="panel panel-primary">
                         <div class="panel-heading">

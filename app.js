@@ -8,6 +8,7 @@ var uglifyJs = require("uglify-js");
 var fs = require('fs');
 var routesApi = require('./app_api/routes/index');
 var app = express();
+app.set('view engine', 'jade');
 
 var appClientFiles = [
   'app_client/app.js',

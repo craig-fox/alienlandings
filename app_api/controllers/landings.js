@@ -1,25 +1,6 @@
 var mongoose = require('mongoose');
 var Landing = mongoose.model('Landing');
 
-/* var theEarth = (function(){
-    var earthRadius = 6371;
-
-    var getDistanceFromRads = function(rads){
-       return parseFloat(rads * earthRadius);
-    };
-
-    var getRadsFromDistance = function(distance){
-       return parseFloat(distance/earthRadius);
-    };
-
-    return {
-      getDistanceFromRads: getDistanceFromRads,
-      getRadsFromDistance: getRadsFromDistance
-    };
-
-
-})(); */
-
 var sendJsonResponse = function(res, status, content){
     res.status(status);
     res.json(content);
@@ -55,11 +36,6 @@ module.exports.landingsListByDistance = function(req, res){
 
     Landing.geoNear(point, geoOptions, function(err, results, stats){
         var landings = [];
-
-        console.log("Point: " + JSON.stringify(point));
-        console.log("The Results: " + JSON.stringify(results));
-
-
         if(err){
             sendJsonResponse(res, 404, err);
         } else {
@@ -122,21 +98,30 @@ module.exports.landingsUpdateOne = function(req, res){
                     return;
                 }
 
-                landing.name = req.body.name;
-                landing.location = req.body.location;
-                landing.rumors = req.body.rumors.split(",");
-                landing.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
-                /* landing.siteViewingTimes = [{
-                    days: req.body.days1,
-                    opening: req.body.opening1,
-                    closing: req.body.closing1,
-                    closed: req.body.closed1
-                },{
-                    days: req.body.days2,
-                    opening: req.body.opening2,
-                    closing: req.body.closing2,
-                    closed: req.body.closed2
-                }]; */
+               var selectedRating = req.body.selectedRating;
+                console.log("PARAMITY JANE " + selectedRating);
+
+                if(selectedRating){
+                    landing.ratings.push(selectedRating);
+                } else {
+                    landing.name = req.body.name;
+                    landing.location = req.body.location;
+                    landing.rumors = req.body.rumors.split(",");
+                    landing.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+
+                    /* landing.siteViewingTimes = [{
+                     days: req.body.days1,
+                     opening: req.body.opening1,
+                     closing: req.body.closing1,
+                     closed: req.body.closed1
+                     },{
+                     days: req.body.days2,
+                     opening: req.body.opening2,
+                     closing: req.body.closing2,
+                     closed: req.body.closed2
+                     }]; */
+                }
+
 
                 landing.save(function(err,location){
                     if(err){

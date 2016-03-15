@@ -11,6 +11,7 @@
             .success(function(data){
                 vm.data = {landing: data};
                 vm.data.landing.credibility = credibility.getCredibility(vm.data.landing.ratings);
+                vm.data.landing.selectedRating = 2;
                 vm.pageHeader = {
                     title: vm.data.landing.name
                 };
@@ -18,6 +19,17 @@
             .error(function(e){
                 console.log(e);
             });
+
+        vm.onRatingSubmit = function(){
+        //  alert("You chose " + vm.data.landing.selectedRating + " stars for landing id " + vm.landingid);
+          alienLandingsData.addRatingToLanding(vm.landingid, {selectedRating: vm.data.landing.selectedRating})
+              .success(function(data){
+                  alert("Cool bananas");
+              })
+              .error(function(data){
+                  alert("Ahhh fuck it");
+              });
+        };
 
         vm.popupQuoteForm = function(){
            var modalInstance = $uibModal.open({

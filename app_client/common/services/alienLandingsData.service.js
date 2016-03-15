@@ -17,10 +17,15 @@
             return $http.post('/api/landings/' + landingid + '/quotes', data);
         };
 
+        var addRatingToLanding = function (landingid, data){
+            return $http.put('/api/landings/' + landingid, data);
+        }
+
         return {
             landingByCoords: landingByCoords,
             landingById: landingById,
-            addQuoteById: addQuoteById
+            addQuoteById: addQuoteById,
+            addRatingToLanding: addRatingToLanding
         };
     }
 })();
