@@ -15,7 +15,8 @@ var doAddQuote = function(req, res, landing){
         landing.quotes.push({
             author: req.body.author,
             quoteText: req.body.quoteText,
-            takenAt: req.body.takenAt
+            takenAt: req.body.takenAt,
+            menInBlack: req.body.menInBlack
         });
 
         landing.save(function(err, landing){
@@ -102,6 +103,8 @@ module.exports.quotesUpdateOne = function(req, res){
                         thisQuote.author = req.body.author;
                         thisQuote.quoteText = req.body.quoteText;
                         thisQuote.takenAt = req.body.takenAt;
+                        thisQuote.menInBlack = req.body.menInBlack;
+
                         landing.save(function(err, landing){
                             if(err){
                                 sendJsonResponse(res, 404, err);

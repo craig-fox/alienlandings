@@ -36,7 +36,8 @@
           alienLandingsData.addQuoteById(landingid, {
                   author: formData.name,
                   takenAt: formData.takenAt,
-                  quoteText: formData.quoteText
+                  quoteText: formData.quoteText,
+                  menInBlack: formData.menInBlack
           })
               .success(function(data){
                 vm.modal.close(data);

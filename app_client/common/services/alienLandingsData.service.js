@@ -14,7 +14,6 @@
         };
 
         var addQuoteById = function (landingid, data){
-            alert("FIZZY COLA!");
             return $http.post('/api/landings/' + landingid + '/quotes', data);
         }
 

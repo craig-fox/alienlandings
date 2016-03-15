@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Landing = mongoose.model('Landing');
 
-var theEarth = (function(){
+/* var theEarth = (function(){
     var earthRadius = 6371;
 
     var getDistanceFromRads = function(rads){
@@ -18,7 +18,7 @@ var theEarth = (function(){
     };
 
 
-})();
+})(); */
 
 var sendJsonResponse = function(res, status, content){
     res.status(status);
@@ -28,13 +28,14 @@ var sendJsonResponse = function(res, status, content){
 module.exports.landingsListByDistance = function(req, res){
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
+
     var point = {
         type: "Point",
         coordinates: [lng, lat]
     };
     var geoOptions = {
         spherical: true,
-        maxDistance: theEarth.getRadsFromDistance(20000000000000000000000)
+        num: 10
     };
 
     if(!lng || !lat){
@@ -46,15 +47,19 @@ module.exports.landingsListByDistance = function(req, res){
 
     Landing.geoNear(point, geoOptions, function(err, results, stats){
         var landings = [];
+
         console.log("Point: " + JSON.stringify(point));
         console.log("The Results: " + JSON.stringify(results));
+
+
         if(err){
             sendJsonResponse(res, 404, err);
         } else {
            results.forEach(function(doc){
-
+               console.log("DocDIX: " + JSON.stringify(doc));
                 landings.push({
-                    distance: theEarth.getDistanceFromRads(doc.dis),
+                   // distance: theEarth.getDistanceFromRads(doc.dis),
+                    distance: doc.dis / 1000,
                     name: doc.obj.name,
                     credibility: doc.obj.credibility,
                     discoveredAt: doc.obj.discoveredAt,

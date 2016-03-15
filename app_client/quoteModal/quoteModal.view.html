@@ -20,8 +20,6 @@
                 <div class="col-xs-10 col-sm-10">
                     <input id="name" name="name" required="required" ng-model="vm.formData.name" class="form-control"/>
                 </div>
-
-
             </div>
             <div class="form-group">
                 <label for="takenAt" class="col-xs-10 col-sm-2 control-label black">Date You Witnessed The Incident</label>
@@ -51,7 +49,8 @@
                 <label for="meninblack" class="col-sm-9 control-label black">
                     Please check this box if the Men In Black have visited you
                 </label>
-                <input id="meninblack" type="checkbox" name="meninblack">
+                <input id="meninblack" type="checkbox" name="meninblack"
+                       ng-model="vm.formData.menInBlack" class="form-control">
             </div>
         </div>
         <div class="modal-footer">
