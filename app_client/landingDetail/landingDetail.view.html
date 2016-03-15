@@ -21,6 +21,19 @@
                         </span>
                         </div>
                     </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Site Viewing Times</h2>
+                        </div>
+                        <div class="panel-body">
+                            <p class="black" ng-repeat="time in vm.data.landing.siteViewingTimes"
+                               ng-switch on="time.closed">
+                                <span ng-switch-when="true">Closed</span>
+                                <span ng-switch-default>{{ time.opening + " - " + time.closing}}</span>
+                                <span>{{ time.days }}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 landing-map">
                     <div class="panel panel-primary">
@@ -45,7 +58,7 @@
             <div class="panel panel-primary quote-panel">
                 <div class="panel-heading">
                     <a ng-click="vm.popupQuoteForm()" class="btn btn-default pull-right">Add quote</a>
-                    <h2 class="panel-title quote">Witness quotes</h2>
+                    <h2 class="panel-title quote">Eyewitness quotes</h2>
                 </div>
                 <div class="panel-body quote-container">
                     <div class="quote" ng-repeat="quote in vm.data.landing.quotes | orderBy:'takenAt':true">

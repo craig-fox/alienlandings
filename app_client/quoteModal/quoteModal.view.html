@@ -45,12 +45,15 @@
                 </div>
 
             </div>
-            <div class="form-group-sm">
-                <label for="meninblack" class="col-sm-9 control-label black">
-                    Please check this box if the Men In Black have visited you
+            <div class="form-group">
+                <label for="meninblack" class="checkbox-inline col-sm-8 control-label black">
+                    <small>Please check this box if the Men In Black have visited you</small>
                 </label>
-                <input id="meninblack" type="checkbox" name="meninblack"
-                       ng-model="vm.formData.menInBlack" class="form-control">
+                <div class="col-sm-1">
+                    <input id="meninblack" type="checkbox" name="meninblack"
+                           ng-model="vm.formData.menInBlack" class="form-control">
+                </div>
+
             </div>
         </div>
         <div class="modal-footer">

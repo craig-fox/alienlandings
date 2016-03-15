@@ -56,15 +56,15 @@ module.exports.landingsListByDistance = function(req, res){
             sendJsonResponse(res, 404, err);
         } else {
            results.forEach(function(doc){
-               console.log("DocDIX: " + JSON.stringify(doc));
+               console.log("Doc Data: " + JSON.stringify(doc));
                 landings.push({
-                   // distance: theEarth.getDistanceFromRads(doc.dis),
                     distance: doc.dis / 1000,
                     name: doc.obj.name,
                     credibility: doc.obj.credibility,
                     discoveredAt: doc.obj.discoveredAt,
                     location: doc.obj.location,
                     rumors: doc.obj.rumors,
+                    siteViewingTimes: doc.obj.siteViewingTimes,
                     _id: doc.obj._id
                 });
             });
@@ -118,7 +118,7 @@ module.exports.landingsUpdateOne = function(req, res){
                 landing.location = req.body.location;
                 landing.rumors = req.body.rumors.split(",");
                 landing.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
-                landing.siteViewingTimes = [{
+                /* landing.siteViewingTimes = [{
                     days: req.body.days1,
                     opening: req.body.opening1,
                     closing: req.body.closing1,
@@ -128,7 +128,7 @@ module.exports.landingsUpdateOne = function(req, res){
                     opening: req.body.opening2,
                     closing: req.body.closing2,
                     closed: req.body.closed2
-                }];
+                }]; */
 
                 landing.save(function(err,location){
                     if(err){
@@ -142,7 +142,6 @@ module.exports.landingsUpdateOne = function(req, res){
 };
 
 module.exports.landingsDeleteOne = function(req, res){
-   // sendJsonResponse(res, 200, {"status":"success"});
     var landingid = req.params.landingid;
     if(landingid){
         Landing
