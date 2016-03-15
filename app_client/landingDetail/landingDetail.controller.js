@@ -21,13 +21,12 @@
             });
 
         vm.onRatingSubmit = function(){
-        //  alert("You chose " + vm.data.landing.selectedRating + " stars for landing id " + vm.landingid);
           alienLandingsData.addRatingToLanding(vm.landingid, {selectedRating: vm.data.landing.selectedRating})
               .success(function(data){
-                  alert("Cool bananas");
+                  console.log("Rating successfully added");
               })
               .error(function(data){
-                  alert("Ahhh fuck it");
+                  alert("Failed to add rating");
               });
         };
 

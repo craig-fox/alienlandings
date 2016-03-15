@@ -99,7 +99,6 @@ module.exports.landingsUpdateOne = function(req, res){
                 }
 
                var selectedRating = req.body.selectedRating;
-                console.log("PARAMITY JANE " + selectedRating);
 
                 if(selectedRating){
                     landing.ratings.push(selectedRating);
