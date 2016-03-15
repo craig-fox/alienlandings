@@ -23,7 +23,15 @@ var Landing = mongoose.model('Landing');
 var sendJsonResponse = function(res, status, content){
     res.status(status);
     res.json(content);
-}
+};
+
+var getCredibility = function(ratings){
+    var sum = 0;
+    for(var i=0; i < ratings.length; i++){
+        sum += parseInt(ratings[i], 10);
+    }
+    return Math.round(sum / ratings.length);
+};
 
 module.exports.landingsListByDistance = function(req, res){
     var lng = parseFloat(req.query.lng);
@@ -60,7 +68,7 @@ module.exports.landingsListByDistance = function(req, res){
                 landings.push({
                     distance: doc.dis / 1000,
                     name: doc.obj.name,
-                    credibility: doc.obj.credibility,
+                    credibility: getCredibility(doc.obj.ratings),
                     discoveredAt: doc.obj.discoveredAt,
                     location: doc.obj.location,
                     rumors: doc.obj.rumors,

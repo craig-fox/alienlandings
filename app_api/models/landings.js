@@ -16,7 +16,8 @@ var siteViewingTimeSchema = new mongoose.Schema({
 
 var landingSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    credibility: {type: Number, "default": 0, min: 0, max:5},
+    //credibility: {type: Number, "default": 0, min: 0, max:5},
+    ratings: [Number],
     discoveredAt: String,
     location: String,
     rumors: [String],

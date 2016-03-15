@@ -17,6 +17,7 @@ var appClientFiles = [
   'app_client/quoteModal/quoteModal.controller.js',
   'app_client/common/services/geolocation.service.js',
   'app_client/common/services/alienLandingsData.service.js',
+  'app_client/common/services/credibility.service.js',
   'app_client/common/filters/formatDistance.filter.js',
   'app_client/common/filters/addHtmlLineBreaks.filter.js',
   'app_client/common/directives/credibilityStars/credibilityStars.directive.js',

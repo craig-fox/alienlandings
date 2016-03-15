@@ -15,7 +15,7 @@
 
         var addQuoteById = function (landingid, data){
             return $http.post('/api/landings/' + landingid + '/quotes', data);
-        }
+        };
 
         return {
             landingByCoords: landingByCoords,
